@@ -486,3 +486,6 @@ $RECYCLE.BIN/
 # Ignore folder containers
 containers/
 
+. c o n t a i n e r s /  
+ 
+/.containers

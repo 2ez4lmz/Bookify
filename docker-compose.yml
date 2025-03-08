@@ -17,9 +17,19 @@
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_HOST_AUTH_METHOD=trust
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - ./.containers/database:/var/lib/postgresql/data
     ports:
-      - "5433:5432"  
-
-volumes:
-  pgdata:
+      - "5432:5432"  
+        
+  bookify-idp:
+    image: quay.io/keycloak/keycloak:latest
+    container_name: Bookify.Identity
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+    volumes:
+      - ./.containers/identity:/opt/keycloak/data
+      - ./.files/bookify-realm-export.json:/opt/keycloak/data/import/bookify-realm-export.json
+    ports:
+      - 18080:8080
+    command: start-dev --import-realm
