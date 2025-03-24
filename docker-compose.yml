@@ -33,3 +33,12 @@
     ports:
       - 18080:8080
     command: start-dev --import-realm
+
+  bookify-seq:
+    image: datalust/seq:latest
+    container_name: Bookify.Seq
+    environment:
+      - ACCEPT_EULA=Y
+    ports:
+      - 5341:5341
+      - 8081:80
